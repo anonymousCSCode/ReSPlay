@@ -64,6 +64,9 @@ adb shell dumpsys window | findstr "mCurrentFocus"
 ```
 python getPosition.py
 ```
+
+The directories named after the application name contain five folders, each of which includes widget screenshots, layout files, and GUI screenshots.
+
 ## Replay (SDP-Net)
 ---
 1. Move recorded `traces` of UIRecorder to `imageFile` directory of SDP-Net.
