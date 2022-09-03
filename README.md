@@ -65,7 +65,20 @@ adb shell dumpsys window | findstr "mCurrentFocus"
 python getPosition.py
 ```
 
-The directories named after the application name contain five folders, each of which includes widget screenshots, layout files, and GUI screenshots.
+The directories named after the application name contain five folders (see Figure 1), each of which includes widget screenshots (see Figure 2), layout files (see Figure 3), and GUI screenshots (see Figure 4).
+
+#### Figure 1:
+![figure1](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/scenarios.jpg)
+
+#### Figure 2:
+![figure2](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/widget_screenshots.jpg)
+
+#### Figure 3:
+![figure3](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/layout_files.jpg)
+
+#### Figure 4:
+![figure4](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/GUI_screenshots.jpg)
+
 
 ## Replay (SDP-Net)
 ---
