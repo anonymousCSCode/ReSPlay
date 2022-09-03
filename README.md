@@ -60,10 +60,18 @@ pkName and activityName represent package name and lunchable activity name of ap
 ```
 adb shell dumpsys window | findstr "mCurrentFocus"
 ```
-2. Start the record process.
+2. Start the recording process.
 ```
 python getPosition.py
 ```
 ## Replay (SDP-Net)
 ---
-  
+1. Move recorded `traces` of UIRecorder to `imageFile` directory of SDP-Net.
+2. Start the offline agent training process.
+```
+python train.py
+```
+3. Start the replaying process.
+```
+python inference.py
+```
