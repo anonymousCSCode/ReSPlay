@@ -45,6 +45,7 @@ The third and fourth steps can refer to [this link](https://www.howtogeek.com/12
 1. Check and Modify the Config File.
 
 Minor amendments to the config file are required, which include deviceName, pkName, activityName, res_x, and res_y.
+
 deviceName:
 ```
 adb devices
