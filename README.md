@@ -42,7 +42,13 @@ The third and fourth steps can refer to [this link](https://www.howtogeek.com/12
   ```
 ## Record (UIRecorder)
 ---
-The recoding phase aims to synchronously extract critical information from input events to provide support for sebsequent analysis. Users such as developers or testers perform a series of operations on mobile devices. Each operation will be responded to by the device's sensors in real-time and sent to the kernel in the form of event streams. The absolute position information for each operation is then identified and extracted. For instance, such events are stored in an external device file `/dev/input/event*` for the Android platform. The operated widget is found based on the recorded hierarchies and extracted coordinates using a recursive method. ReSPlay records the following critical information: GUI screenshots and widget screenshots. 
+The recoding phase aims to synchronously extract critical information from input events to provide support for sebsequent analysis. Specifically, ReSPlay records GUI screenshots, layout files, and widget screenshots. 
+
+Users such as developers or testers perform a series of operations on mobile devices. Each operation will be responded to by the device's sensors in real-time and sent to the kernel in the form of event streams. The absolute position information for each operation is then identified and extracted. For instance, such events are stored in an external device file `/dev/input/event*` for the Android platform. 
+
+The operated widget is found based on the recorded hierarchies and extracted coordinates using a recursive method. Widget screenshots are cropped from GUI screenshots based on widget coordinates.
+
+The process of the recording phase is as follows.
 
 1. Check and Modify the Config File.
 
