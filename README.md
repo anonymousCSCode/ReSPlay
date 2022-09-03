@@ -48,23 +48,17 @@ Users such as developers or testers perform a series of operations on mobile dev
 
 The operated widget is found based on the recorded hierarchies and extracted coordinates using a recursive method. Widget screenshots are cropped from GUI screenshots based on widget coordinates.
 
-The process of the recording phase is as follows.
+**The process of the recording phase is as follows.**
 
 1. Check and Modify the Config File.
 
-Minor amendments to the config file are required, which include deviceName, pkName, activityName, res_x, and res_y.
+Minor amendments to the config file are required, which include `deviceName`, `pkName`, `activityName`, `res_x`, and `res_y`. `res_x` and `res_y` indicate the device resolution in the x and y dimensions. `pkName` and `activityName` represent package name and lunchable activity name of apps.
 
-To retrieve the `deviceName`, run the following commands:
+To retrieve the `deviceName`, `res_x`, `res_y`, `pkName`, and `activityName`, run the following commands:
 ```
-adb devices
-```
-res_x and res_y indicate the device resolution in the x and y dimensions. To retrieve them, run the following commands:
-```
-adb shell wm size
-```
-pkName and activityName represent package name and lunchable activity name of apps. To retrieve them, run the following commands:
-```
-adb shell dumpsys window | findstr "mCurrentFocus"
+deviceName:adb devices
+resolution: adb shell wm size
+package and activity name: adb shell dumpsys window | findstr "mCurrentFocus"
 ```
 2. Start the recording process.
 ```
