@@ -56,7 +56,7 @@ Minor amendments to the config file are required, which include `deviceName`, `p
 
 To retrieve the `deviceName`, `res_x`, `res_y`, `pkName`, and `activityName`, run the following commands:
 ```
-deviceName:adb devices
+deviceName: adb devices
 resolution: adb shell wm size
 package and activity name: adb shell dumpsys window | findstr "mCurrentFocus"
 ```
