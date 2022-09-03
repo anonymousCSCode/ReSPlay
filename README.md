@@ -15,6 +15,10 @@ Experimental apps are available to download from [this link](https://drive.googl
 
 ## Environment settings
 ---
+  * Python 3.9.6
+  * ADB
+  * Appium
+  
 #### Step One: ADB Install
 1. Get the Latest SDK Platform-tools From Android Studio's [SDK Manager](https://developer.android.com/studio/intro/update#sdk-manager) or From the [Sdkmanager](https://developer.android.com/studio/command-line/sdkmanager) Command-line Tool. Once you’ve downloaded the Platform Tools package, extract the contents of the .zip file to a folder (like “C:\Android\platform-tools”).
 
@@ -28,10 +32,35 @@ The third and fourth steps can refer to [this link](https://www.howtogeek.com/12
 #### Step Two: Appium Install
   The installation process can refer to [this link](https://appium.io/docs/en/about-appium/getting-started/?lang=en).
 
-#### Step Three: Dependency Library Installation
-  * Python 3.9.6
+#### Step Three: Dependency Library Installation  
   Run `pip install -r requirements.txt` to install the Python libraries:
-
-## Instructions
+  
+#### Step Four: Setup App
+  Install the app on the mobile device
+  ```
+  adb install XXX.apk
+  ```
+## Record (UIRecorder)
 ---
+1. Check and Modify the Config File.
 
+Minor amendments to the config file are required, which include deviceName, pkName, activityName, res_x, and res_y.
+deviceName:
+```
+adb devices
+```
+res_x and res_y indicate the device resolution in the x and y dimensions. 
+```
+adb shell wm size
+```
+pkName and activityName represent package name and lunchable activity name of apps:
+```
+adb shell dumpsys window | findstr "mCurrentFocus"
+```
+2. Start the record process, which will log GUI screenshots and widget screenshots.
+```
+python getPosition.py
+```
+
+
+  
