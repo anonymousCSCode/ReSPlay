@@ -48,15 +48,15 @@ The recoding phase aims to synchronously extract critical information from input
 
 Minor amendments to the config file are required, which include deviceName, pkName, activityName, res_x, and res_y.
 
-deviceName:
+To retrieve the `deviceName`, run the following commands:
 ```
 adb devices
 ```
-res_x and res_y indicate the device resolution in the x and y dimensions. 
+res_x and res_y indicate the device resolution in the x and y dimensions. To retrieve them, run the following commands:
 ```
 adb shell wm size
 ```
-pkName and activityName represent package name and lunchable activity name of apps:
+pkName and activityName represent package name and lunchable activity name of apps. To retrieve them, run the following commands:
 ```
 adb shell dumpsys window | findstr "mCurrentFocus"
 ```
