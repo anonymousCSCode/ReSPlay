@@ -17,23 +17,11 @@ Experimental apps are available to download from [this link](https://drive.googl
 ## Instructions
 ---
 #### ADB Install
-Step 1. Get the latest SDK platform-tools from Android Studio's [SDK Manager](https://developer.android.com/studio/intro/update#sdk-manager) or from the [sdkmanager](https://developer.android.com/studio/command-line/sdkmanager) command-line tool. Once you’ve downloaded the Platform Tools package, extract the contents of the .zip file to a folder (like “C:\Android\platform-tools”).
-Step 2. Configure your PATH Variable. The PATH variable is a master list of where to look for command line tools.
-#### Windows
-Depending on which version of Windows you’re using, these steps may be slightly different. To add ADB to your PATH variable, follow these steps:
+1. Get the Latest SDK Platform-tools From Android Studio's [SDK Manager](https://developer.android.com/studio/intro/update#sdk-manager) or From the [Sdkmanager](https://developer.android.com/studio/command-line/sdkmanager) Command-line Tool. Once you’ve downloaded the Platform Tools package, extract the contents of the .zip file to a folder (like “C:\Android\platform-tools”).
 
-1. Open the Start menu and search for “advanced system settings.”
-2. Click “View advanced system settings.”
-3. Click the box that says “Environment Variables.”
-4. Under “System variables” click on the variable named “Path”.
-5. Click “Edit...”
-6. (Windows 7,8): Add ;[FOLDERNAME] to the end of the “Variable value” box, replacing [FOLDERNAME] with the folder path where you extracted Platform Tools. Be sure to include the semicolon at the beginning so Windows knows you’re adding a new folder.
-7. (Windows 10): Click “New” and paste the folder path where you extracted the Platform Tools. Hit Enter and click OK.
+2. Configure the PATH Variable. The PATH variable is a master list of where to look for command line tools. For details, please refer to [this link](https://lifehacker.com/the-easiest-way-to-install-androids-adb-and-fastboot-to-1586992378).
 
-#### MacOS/Linux
-1. Open up a Terminal window by navigating to Applications/Utilities or searching for it in Spotlight.
-2. Enter the following command to open up your Bash profile: touch ~/.bash_profile; open ~/.bash_profile
-3. The .bash_profile file should open in your default text program.
-4. Add this line to the end of the file: export PATH=”$HOME/[FOLDERNAME]/bin:$PATH” replacing [FOLDERNAME] with the location where you extracted ADB and fastboot.
-5. Save the file and press Cmd+Q to quit your text editor.
-6. In your terminal enter source ~/.bash_profile to run your Bash profile for the first time.
+3. Enable USB Debugging on Mobile Phones.
+
+4. Test ADB (if Needed).
+The third and fourth steps can refer to [this link](https://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/).
