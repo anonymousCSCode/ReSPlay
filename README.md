@@ -42,6 +42,8 @@ The third and fourth steps can refer to [this link](https://www.howtogeek.com/12
   ```
 ## Record (UIRecorder)
 ---
+The recoding phase aims to synchronously extract critical information from input events to provide support for sebsequent analysis. Users such as developers or testers perform a series of operations on mobile devices. Each operation will be responded to by the device's sensors in real-time and sent to the kernel in the form of event streams. The absolute position information for each operation is then identified and extracted. For instance, such events are stored in an external device file `/dev/input/event*` for the Android platform. The operated widget is found based on the recorded hierarchies and extracted coordinates using a recursive method. ReSPlay records the following critical information: GUI screenshots and widget screenshots. 
+
 1. Check and Modify the Config File.
 
 Minor amendments to the config file are required, which include deviceName, pkName, activityName, res_x, and res_y.
@@ -58,10 +60,10 @@ pkName and activityName represent package name and lunchable activity name of ap
 ```
 adb shell dumpsys window | findstr "mCurrentFocus"
 ```
-2. Start the record process, which will log GUI screenshots and widget screenshots.
+2. Start the record process.
 ```
 python getPosition.py
 ```
-
-
+## Replay (SDP-Net)
+---
   
