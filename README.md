@@ -90,7 +90,7 @@ The directories named with the package name contain five folders/scenarios, each
    
    It can be obtained by the method mentioned above. `adb shell wm size`.
 
-2. Start the Appium server.
+2. Start the Appium server, which will interact with mobile devices on various platforms such as Android and iOS.
 
    To open Appium, type Appium followed by the IP address and the server port number, as shown in Figure below.
    
