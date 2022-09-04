@@ -18,6 +18,7 @@ Experimental apps are available to download from [this link](https://drive.googl
   * Python 3.9.6
   * ADB
   * Appium
+  * Tesseract
   
 #### Step One: ADB Install
 1. Get the Latest SDK Platform-tools From Android Studio's [SDK Manager](https://developer.android.com/studio/intro/update#sdk-manager) or From the [Sdkmanager](https://developer.android.com/studio/command-line/sdkmanager) Command-line Tool. Once you’ve downloaded the Platform Tools package, extract the contents of the .zip file to a folder (like “C:\Android\platform-tools”).
