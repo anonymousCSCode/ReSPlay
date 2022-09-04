@@ -23,7 +23,7 @@ def call_adb(command, deviceId = None):
     results.close()
     return command_result
 
-def checkPackageInstall(pkName):
+def checkPackageInstall():
     result = call_adb('shell pm list package | grep %s' % pkName)
     result = result.replace('\r\n', '').strip()
     if result == '':
@@ -47,11 +47,11 @@ def start_activity(activity):
     # adb shell am start -n <activity>
     call_adb('shell am start -n %s' % activity)
 
-def checkIfInstalled(pkName,activityName):
+def checkIfInstalled(driver,pkName,activityName):
     while True:
-        ret = checkPackageInstall(pkName)
-        if ret is True:
-            force_stop(pkName)
+        is_install = driver.is_app_installed(pkName)
+        if is_install:
+            driver.terminate_app(pkName)
             time.sleep(0.5)
             start_activity(pkName+'/'+activityName)
             time.sleep(0.5)
