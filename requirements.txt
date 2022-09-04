@@ -7,7 +7,6 @@ jieba==0.42.1
 opencv-python==4.5.3.56
 pandas==1.4.2
 pillow==9.1.1
-pytesseract==0.3.8
 scikit-image==0.18.2
 scikit-learn==1.1.1
 xmldiff==2.4
