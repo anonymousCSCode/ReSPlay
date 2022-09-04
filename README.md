@@ -86,7 +86,7 @@ The directories named with the package name contain five folders/scenarios, each
 
 &nbsp;&nbsp;&nbsp;&nbsp;The specific operation procedures can refer to the [previous work](https://github.com/fxlysm/PYAndroid_Test/blob/50dbd3aa6aa3e2514230bc82f7e2839fc969ebd5/com/monkey/RandomMonkey.py).
 
-#### Step Two: Start training.
+#### Step Two: Start offline training.
 
 1. Modify global variables in the `config` file, such as `REPLAY_RESOLUTION_X`  and `REPLAY_RESOLUTION_Y`.
    
