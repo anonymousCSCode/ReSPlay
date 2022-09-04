@@ -120,12 +120,12 @@ python train.py
 
 #### Step Three: Start the replaying phase.
 
-The first step is to move recorded `traces` in the recording phase to `imageFile` directory of SDP-Net. Then, run the following commands.
+&nbsp;&nbsp;&nbsp;&nbsp;The first step is to move recorded `traces` in the recording phase to `imageFile` directory of SDP-Net. Then, run the following commands.
 
 ```
 python inference.py
 ```
-During this phase, ReSPlay will automatically record the GUI screenshots on the replaying device, which facilitates a visual check on whether a replay is correct.
+&nbsp;&nbsp;&nbsp;&nbsp;During this phase, ReSPlay will automatically record the GUI screenshots on the replaying device, which facilitates a visual check on whether a replay is correct.
 The result is shown in the Figure below.
 
 <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/replay_example.png" width="600">
