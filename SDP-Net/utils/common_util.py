@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from config import *
 from utils.image_util import imread,imresize,convert_canny
 from PIL import Image
-
+from sklearn.metrics.pairwise import cosine_similarity
 
 def read_json(file):
     with open(file, 'r') as load_f:
@@ -55,7 +55,10 @@ def calculate_similarity(record,replay):
     with torch.no_grad():
         vec0 = vtr.vectorize(record)
         vec1 = vtr.vectorize(replay)
-    dist = imgsim.distance(vec0, vec1)
+    if IMG_SIM_TYPE == 'Euclidean':
+        dist = imgsim.distance(vec0, vec1)-IMG_DIS_NRORM
+    elif IMG_SIM_TYPE == 'Cosine':
+        dist = cosine_similarity(vec0,vec1)
     return dist
 
 def init_steps_done_dict(action_len):

@@ -36,8 +36,8 @@ def match_img(image,target,value,thresholdFlag=False,params=None):
     except:
         pass
     if thresholdFlag:
-        ret0,img_gray = cv2.threshold(img_gray, params["binary_threshold"], 255, cv2.THRESH_BINARY)
-        ret1,template = cv2.threshold(template, params["binary_threshold"], 255, cv2.THRESH_BINARY)
+        ret0,img_gray = cv2.threshold(img_gray, params["img_binary_threshold"], 255, cv2.THRESH_BINARY)
+        ret1,template = cv2.threshold(template, params["img_binary_threshold"], 255, cv2.THRESH_BINARY)
     template = cv2.resize(template,(150,int(150*template.shape[1]/template.shape[0])))
     res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
     threshold = value
