@@ -131,3 +131,11 @@ python inference.py
 The result is shown in the Figure below.
 
 <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/replay_example.png" width="600">
+
+## Plan for Improvement
+---
+
+1. Consider how to effectively replay event traces on apps that are quite different on different platforms.
+
+2. Consider using the source code to improve recordand-replay for apps developed by cross-platform solutions like
+Flutter or ReactNative.
