@@ -82,12 +82,15 @@ The directories named with the package name contain five folders/scenarios, each
 
 ## Replay (SDP-Net)
 ---
-1. Move recorded `traces` of UIRecorder to `imageFile` directory of SDP-Net.
-2. Start the training process.
+#### Step One: Move recorded `traces` of UIRecorder to `imageFile` directory of SDP-Net.
+
+#### Step Two: Start training.
+1. Start an Appium server.
+
 ```
 python train.py
 ```
-3. Start the replaying process.
+#### Step Three:. Start the replaying phase.
 ```
 python inference.py
 ```
