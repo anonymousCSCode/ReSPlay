@@ -88,7 +88,7 @@ The directories named with the package name contain five folders/scenarios, each
 
 1. Modify global variables in the `config` file, such as `REPLAY_RESOLUTION_X`  and `REPLAY_RESOLUTION_Y`.
    
-   It can be obtained by the method mentioned above.
+   It can be obtained by the method mentioned above. `adb shell wm size`.
 
 2. Start an Appium server.
 
