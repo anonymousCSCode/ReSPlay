@@ -13,8 +13,6 @@ All the evaluation artifacts are available here, which include tools, apps we us
 The selected apps are Keep, Booking, Amazon Shopping, Evernote, App Music, Kindle, AdGuard, HERE WeGo, Tricount, Wikipedia, Monkey, and openHAB. The categories they belong to include health & fitness, travel, shopping, productivity, music, books, personalization, tools, finance, news, development, and lifestyle.
 Experimental apps are available to download from [this link](https://drive.google.com/file/d/161DLXEDe7S4WPCPOzCVDpiZQBMzdoeTR/view?usp=sharing).
 
-The experimental scenarios are available [here](https://drive.google.com/file/d/1B23SEAHn56Ks4PfRLa7DWzk0x4jpUqFp/view?usp=sharing).
-
 
 ## Environment settings
 ---
@@ -83,6 +81,7 @@ The directories named with the package name contain five folders/scenarios, each
 #### Figure 3:
 ![figure4](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/GUI_screenshots.jpg)
 
+Specifically, the scenarios in our experiments are available [here](https://drive.google.com/file/d/1B23SEAHn56Ks4PfRLa7DWzk0x4jpUqFp/view?usp=sharing).
 
 ## Replay (SDP-Net)
 ---
