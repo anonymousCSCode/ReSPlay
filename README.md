@@ -103,7 +103,7 @@ The directories named with the package name contain five folders/scenarios, each
  <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start2.png" width="250">
 </div>
 
-3. Run the training script.
+3. Run the training script, which will output an offline trained model. The trained model will be used to search for potential event traces and replay them on the target device.
 ```
 python train.py
 ```
