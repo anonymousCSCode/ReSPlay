@@ -94,7 +94,7 @@ The directories named with the package name contain five folders/scenarios, each
 
    To open Appium, type Appium followed by the IP address and the server port number, as shown in Figure below.
    
-   Now, Appium is running and the REST HTTP is listening on the IP address (In this example, localhost 127.0. 0.1 and the server port 4723).
+   Now, Appium is running and the REST HTTP is listening on the IP address (In this example, localhost 0.0.0.0 and the server port 4723).
 
 
 <div align="center">
