@@ -122,3 +122,4 @@ python train.py
 ```
 python inference.py
 ```
+During this phase, ReSPlay will automatically record the GUI screenshots on the replaying device, which facilitates a visual check on whether a replay is correct.
