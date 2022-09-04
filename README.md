@@ -67,16 +67,16 @@ python getPosition.py
 
 **After the abovementioned processes, some necessary contents are automatically parsed and stored in a nested directory.**
 
-The directories named with the package name contain five folders/scenarios, each of which includes widget screenshots (see Figure 2), layout files (see Figure 3), and GUI screenshots (see Figure 4).
+The directories named with the package name contain five folders/scenarios, each of which includes widget screenshots (see Figure 1), layout files (see Figure 2), and GUI screenshots (see Figure 3).
 
 
-#### Figure 2:
+#### Figure 1:
 ![figure2](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/widget_screenshots.jpg)
 
-#### Figure 3:
+#### Figure 2:
 ![figure3](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/layout_files.jpg)
 
-#### Figure 4:
+#### Figure 3:
 ![figure4](https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/GUI_screenshots.jpg)
 
 
