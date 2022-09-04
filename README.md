@@ -120,7 +120,7 @@ python train.py
 
 #### Step Three: Start the replaying phase.
 
-The first step is to move recorded `traces` in the recording phase to `imageFile` directory of SDP-Net.
+The first step is to move recorded `traces` in the recording phase to `imageFile` directory of SDP-Net. Then, run the following commands.
 
 ```
 python inference.py
