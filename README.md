@@ -108,7 +108,7 @@ The directories named with the package name contain five folders/scenarios, each
 python train.py
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;The output of the Appium server:
+&nbsp;&nbsp;&nbsp;&nbsp;The Appium server interacts with the mobile device successfully when it receives a response with status 200 (see the Figure below).:
 <div align="center">
 	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/train_appium_server.png" width="250">
 </div>
