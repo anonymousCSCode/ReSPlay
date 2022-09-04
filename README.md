@@ -113,7 +113,7 @@ python train.py
 	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/train_appium_server.png" width="250">
 </div>
 
-&nbsp;&nbsp;&nbsp;&nbsp;The console output：
+&nbsp;&nbsp;&nbsp;&nbsp;Our tool will output the contents like the Figure below when it runs successfully.
 <div align="center">
 <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/ReSPlay_train.png" width="250">
 </div>
