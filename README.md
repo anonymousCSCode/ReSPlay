@@ -84,6 +84,8 @@ The directories named with the package name contain five folders/scenarios, each
 ---
 #### Step One: Run monkeyrunner to simulate random clicks by developers and produce contents in the same format as the recording phase.
 
+The specific operation procedures refer to the [previous work](https://github.com/fxlysm/PYAndroid_Test/blob/50dbd3aa6aa3e2514230bc82f7e2839fc969ebd5/com/monkey/RandomMonkey.py).
+
 #### Step Two: Start training.
 
 1. Modify global variables in the `config` file, such as `REPLAY_RESOLUTION_X`  and `REPLAY_RESOLUTION_Y`.
