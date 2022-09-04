@@ -30,13 +30,13 @@ Experimental apps are available to download from [this link](https://drive.googl
 The third and fourth steps can refer to [this link](https://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/).
 
 #### Step Two: Appium Install
-  The installation process can refer to [this link](https://appium.io/docs/en/about-appium/getting-started/?lang=en).
+&nbsp;&nbsp;&nbsp;&nbsp;The installation process can refer to [this link](https://appium.io/docs/en/about-appium/getting-started/?lang=en).
 
 #### Step Three: Dependency Library Installation  
-  Run `pip install -r requirements.txt` to install the Python libraries:
+&nbsp;&nbsp;&nbsp;&nbsp; Run `pip install -r requirements.txt` to install the Python libraries:
   
 #### Step Four: Setup App
-  Install the app on the mobile device
+&nbsp;&nbsp;&nbsp;&nbsp;Install the app on the mobile device
   ```
   adb install XXX.apk
   ```
@@ -50,7 +50,7 @@ The operated widget is found based on the recorded hierarchies and extracted coo
 
 **The process of the recording phase is as follows.**
 
-1. Check and Modify the Config File.
+1. Check and modify the `config` file.
 
 Minor amendments to the config file are required, which include `deviceName`, `pkName`, `activityName`, `res_x`, and `res_y`. `res_x` and `res_y` indicate the device resolution in the x and y dimensions. `pkName` and `activityName` represent package name and lunchable activity name of apps.
 
@@ -92,7 +92,7 @@ The directories named with the package name contain five folders/scenarios, each
 
 2. Start an Appium server.
 
-The process is described in the following.
+&nbsp;&nbsp;&nbsp;&nbsp;The process is described in the following.
 
 <div align="center">
 	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start1.png" width="250">
@@ -105,12 +105,12 @@ The process is described in the following.
 python train.py
 ```
 
-The output of the Appium server:
+&nbsp;&nbsp;&nbsp;&nbsp;The output of the Appium server:
 <div align="center">
 	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/train_appium_server.png" width="250">
 </div>
 
-The console output：
+&nbsp;&nbsp;&nbsp;&nbsp;The console output：
 <div align="center">
 <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/ReSPlay_train.png" width="250">
 </div>
