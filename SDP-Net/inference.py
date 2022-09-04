@@ -66,46 +66,7 @@ desired_caps = {'platformName': 'Android', # default Android
 
 driver = webdriver.Remote(f'http://127.0.0.1:4723/wd/hub', desired_caps)
 
-
-def optimize_model():
-    if len(memory) <= BATCH_SIZE:
-        return
-    policy_net = globalVariable.get('policy_net')
-    target_net = globalVariable.get('target_net')
-    optimizer = globalVariable.get('optimizer')
-    batch_num = int(len(memory) / BATCH_SIZE)
-    epoch_num = 2000
-    print('==================training==================')
-    for it in range(batch_num*epoch_num):
-        transitions = memory.sample(BATCH_SIZE)
-        batch = Transition(*zip(*transitions))
-        # concat
-        non_final_mask = torch.tensor(tuple(map(lambda s: s is not None,batch.next_state)), device=device, dtype=torch.bool).to(device)
-        non_final_next_states = torch.cat([s for s in batch.next_state if s is not None]).to(device)
-        state_batch = torch.cat(batch.state).to(device)
-        action_batch = torch.cat(batch.action).to(device)
-        reward_batch = torch.cat(batch.reward).to(device)
-        # calculate Q values
-        dqn_net = policy_net(state_batch)
-        # the Q value of actions
-        state_action_values = dqn_net.gather(1, action_batch)
-        next_state_values = torch.zeros(BATCH_SIZE, device=device)
-        next_state_values[non_final_mask] = target_net(non_final_next_states).max(1)[0].detach()
-        expected_state_action_values = (next_state_values * GAMMA) + reward_batch
-        # Compute Bellman error
-        bellman_error = expected_state_action_values.unsqueeze(1) - state_action_values
-        # clip the bellman error between [-1 , 1]
-        clipped_bellman_error = bellman_error.clamp(-1, 1)
-        # Note: clipped_bellman_delta * -1 will be right gradient
-        d_error = clipped_bellman_error * -1.0
-        optimizer.zero_grad()
-        state_action_values.backward(d_error.data)
-        # Clear previous gradients before backward pass
-        for param in policy_net.parameters():
-            param.grad.data.clamp_(-1, 1)
-        optimizer.step()
-
-def train_apk(pkName,activityName,params):
+def inference(pkName,activityName,params):
     pkPath = 'imageFile/'+pkName
     trace_list = os.listdir(pkPath)
     vtr = globalVariable.get('vtr')
@@ -125,10 +86,6 @@ def train_apk(pkName,activityName,params):
         step_index = 0
         globalVariable.set("position_set",{})
         while step_index < action_len:
-            match_flag = True
-            text_flag = True
-            first_flag = True
-            second_flag = True
             count_action = 0
             if trace_flag:
                 break
@@ -137,9 +94,6 @@ def train_apk(pkName,activityName,params):
                 position_set[str(step_index)] = {}
             while True:
                 print('==========================')
-                if local_step % TARGET_UPDATE==0:
-                    optimize_model()
-                    print("optimize model")
                 if restart_flag:
                     for item in range(step_index):
                         action_item = action_dict[str(item)]
@@ -154,79 +108,20 @@ def train_apk(pkName,activityName,params):
                 current_state_cpu = get_state(CACHE_FRONT,record_behind_path,SIM_DIR+'/replay_front.png')
                 current_state = current_state_cpu.to(device)
                 # select action
-                component_path = pkPath + '/' + trace + '/component/'+'comp_'+(str(step_index+1))+'.png'
-                print(component_path)
-                if text_flag:
-                    random_index = match_text(driver,component_path,params)
-                    text_flag = False
-                    if random_index == -2:
-                        # select other strategies
-                        random_index, ime_flag, pos = select_action_by_synthesis_strategy(current_state, step_index,component_path, match_flag,params)
-                        if ime_flag:
-                            continue
-                        if random_index == -1:
-                            trace_flag = True
-                            break
-                    else:
-                        print('attempt attribute matching success')
-                else:
-                    if first_flag:
-                        random_index = 2 * COLUMN
-                        ime_flag = False
-                        first_flag = False
-                    elif second_flag:
-                        random_index = 4 * COLUMN - 1
-                        ime_flag = False
-                        second_flag = False
-                    else:
-                        # select other strategies
-                        random_index, ime_flag, pos = select_action_by_synthesis_strategy(current_state, step_index,component_path, match_flag,params)
-                    if ime_flag:
-                        continue
-                    if random_index == -1:
-                        trace_flag = True
-                        break
-                grid_position = torch.tensor([[random_index]], device=device, dtype=torch.long)
+                random_index = select_action(current_state,step_index)
                 exec_action(driver,random_index,params=params)
                 time.sleep(5)
                 count_action = count_action + 1
                 local_step += 1
-                # position exist start
-                if str(random_index) in position_set[str(step_index)]:
-                    if position_set[str(step_index)][str(random_index)]['reward'] >=1.0:
-                        if not text_flag:
-                            match_flag = True
-                        break
-                    elif position_set[str(step_index)][str(random_index)]['restart']:
-                        restart_flag = True
-                        if not text_flag:
-                            if pos:
-                                match_flag = False
-                        # for closing popupWindow
-                        exec_action(driver,COLUMN,params)
-                        checkIfInstalled(driver,pkName,activityName)
-                    continue
-                else:
-                    position_set[str(step_index)][str(random_index)]={}
-                # position exist end
                 print('random index', random_index)
-                # next state start
                 driver.get_screenshot_as_file(CACHE_BEHIND)
                 record_behind2_path = pkPath + '/' + trace + '/screen/' + 'ss_' + (str(step_index + 3)) + '.png'
-                next_state = get_state(CACHE_BEHIND,record_behind2_path,SIM_DIR+'/replay_behind.png')
-                # next state end
                 record_front_raw_path = pkPath + '/' + trace + '/screen/'+'ss_'+str(step_index+1)+'.png'
                 shutil.copy(record_front_raw_path, 'simdir/record_front.png')
                 reward_value = get_reward_by_similarity(params)
                 self_distance = vec_distance('simdir/replay_front.png', 'simdir/replay_behind.png', canny=False)
-                reward = torch.tensor([reward_value], device=device)
-                # store the related information of position
-                position_set[str(step_index)][str(random_index)]['reward'] = reward_value
-                position_set[str(step_index)][str(random_index)]['restart'] = False
-                # store transitions
                 if reward_value>=1.0:
                     action_dict[str(step_index)] = random_index
-                    match_flag = True
                     store_path = 'store/' + pkName + '/' + str(trace) + '/' + str(step_index)
                     if not os.path.exists(store_path):
                         os.makedirs(store_path)
@@ -234,7 +129,6 @@ def train_apk(pkName,activityName,params):
                     print(action_dict)
                     break
                 else:
-                    position_set[str(step_index)][str(random_index)]['restart'] = True
                     if self_distance>0.1:
                         restart_flag = True
                         exec_action(driver, COLUMN, params)
@@ -243,11 +137,7 @@ def train_apk(pkName,activityName,params):
         endtime = datetime.datetime.now()
         overall_record[trace]["action"] = action_dict
         overall_record[trace]["time"] = (endtime - starttime).seconds
-    policy_net = globalVariable.get('policy_net')
-    torch.save(policy_net.state_dict(), 'save/policy_net_'+pkName+'.pth')
     print(overall_record)
-    with open('save/'+pkName+'.json', 'w') as load_f:
-        json.dump(overall_record,load_f)
     print('finished')
 
 def initial_global_variables():
@@ -256,16 +146,21 @@ def initial_global_variables():
     globalVariable.set('vtr',vtr)
     policy_net = DQN().to(device)
     target_net = DQN().to(device)
+    policy_net.load_state_dict(torch.load('save/policy_net.pth'))
     target_net.load_state_dict(policy_net.state_dict())
     target_net.eval()
+    optimizer = optim.RMSprop(policy_net.parameters(), lr=0.00025)
     globalVariable.set('policy_net',policy_net)
     globalVariable.set('target_net',target_net)
+    globalVariable.set('optimizer', optimizer)
 
 if __name__ == '__main__':
     pk_dict = read_json('global.json')
     for pkName in pk_dict:
+        if pkName != 'com.yinxiang':
+            continue
         activityName = pk_dict[pkName]
         params = read_json('configuration/global_device.json')
+        # load trained models
         initial_global_variables()
-        train_apk(pkName,activityName,params)
-        getTotalM('python.exe')
+        inference(pkName,activityName,params)

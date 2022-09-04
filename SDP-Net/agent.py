@@ -14,43 +14,32 @@ from utils.common_util import vec_distance
 from utils.image_util import fromimage,match_img
 from text_extraction import image_to_words,get_equal_rate_1
 from text_extraction import match_text
-
+from appium.webdriver.common.touch_action import TouchAction
 def get_reward_by_similarity(params):
     record_front = 'simdir/record_front.png'
     record_behind = 'simdir/record_behind.png'
     replay_front = 'simdir/replay_front.png'
     replay_behind = 'simdir/replay_behind.png'
-    behind_wasser_dist = earth_movers_distance(record_behind,replay_behind)
-    behind_vector_dist = vec_distance(record_behind, replay_behind)
-    behind_vector_canny_dist = vec_distance(record_behind, replay_behind,canny=False)
+    # The distance between GUI images
+    image_distance = vec_distance(record_behind, replay_behind)
     img_record = Image.open(record_behind)
     img_replay = Image.open(replay_behind)
     img_record_word = image_to_words(img_record,params=params)
     img_replay_word = image_to_words(img_replay,params=params)
-    img_record_word_ch = image_to_words(img_record,lang='chi_sim',params=params)
-    if params['lang']=='mix':
-        words_len = len(img_record_word) + len(img_record_word_ch)
-    else:
-        words_len = len(img_record_word)
     img_record_str = ' '.join(img_record_word)
     img_replay_str = ' '.join(img_replay_word)
+    # The distance between texts in GUI states
     string_similarity = get_equal_rate_1(img_replay_str,img_record_str)
-    if words_len > params['word_len']:
-        string_similarity_threshold = params["large_similarity_threshold"]
-        type = "larger_word_len"
+    if string_similarity > params["text_similarity_threshold"]:
+        text_reward = 1.0
     else:
-        string_similarity_threshold = params["similarity_threshold"]
-        type = "less_word_len"
-    print(type,behind_wasser_dist,behind_vector_dist,behind_vector_canny_dist,string_similarity)
-    if behind_vector_dist < params[type]["vector_distance"] and behind_vector_canny_dist < params[type]["vector_canny_distance"] and string_similarity >= string_similarity_threshold:
-        reward = 1.0
+        text_reward = 0.0
+    if image_distance > 0.8:
+        vision_reward = 1.0
     else:
-        reward = 0.0
-    if behind_wasser_dist > params[type]["earth_distance"]:
-        reward = 0.0
-    if string_similarity == 1.0:
-        reward = 1.0
-    return reward,string_similarity_threshold,string_similarity
+        vision_reward = 0.0
+    immediate_reward = 0.8*text_reward + 0.2*vision_reward
+    return immediate_reward
 
 def select_action(state,step_index):
     # fetch global variable
@@ -87,8 +76,10 @@ def select_action(state,step_index):
     steps_done_dict[str(step_index)] = steps_done_dict[str(step_index)] + 1
     return grid_position
 
-def exec_action(action,params=None):
+def exec_action(driver,action,params=None):
     tapx,tapy = get_coord_by_position(action,params)
+    # driver.tap([(tapx, tapy)],300)
+    print((tapx, tapy))
     os.system('adb shell input tap %d %d' % (tapx, tapy))
     time.sleep(2)
 
@@ -98,16 +89,10 @@ def get_coord_by_position(action,params):
     cell_width, cell_hight = REPLAY_RESOLUTION_X / COLUMN, REPLAY_RESOLUTION_Y / ROW
     if pos_col > 0:
         tapy = pos_row * cell_hight + 0.5 * cell_hight
-        if params["action_position"]==1:
-            tapx = (pos_col - 1) * cell_width + 0.5 * cell_width # center
-        else:
-            tapx = (pos_col - 1) * cell_width # borden
+        tapx = (pos_col - 1) * cell_width + 0.5 * cell_width # center selected
     else:
         tapy = (pos_row - 1) * cell_hight + 0.5 * cell_hight
-        if params["action_position"] == 1:
-            tapx = (COLUMN - 1) * cell_width + 0.5 * cell_width # center
-        else:
-            tapx = (COLUMN - 1) * cell_width # borden
+        tapx = (COLUMN - 1) * cell_width + 0.5 * cell_width # center
     return tapx,tapy
 
 def get_grid_by_position(action):
@@ -179,10 +164,10 @@ def select_action_by_synthesis_strategy(current_state,step_index,component_path,
     ime_flag = False
     position_set = globalVariable.get('position_set')
     if match_flag:
-        if params['binary_threshold'] < 0:
-            pos = match_img(CACHE_FRONT, component_path, value=params["img_threshold_low"])
+        if params['img_binary_threshold'] < 0:
+            pos = match_img(CACHE_FRONT, component_path, value=params["img_match_threshold"])
         else:
-            pos = match_img(CACHE_FRONT, component_path, value=params["img_threshold_low"], thresholdFlag=True, params=params)
+            pos = match_img(CACHE_FRONT, component_path, value=params["img_match_threshold"], thresholdFlag=True, params=params)
     else:
         pos = None
     if pos:
