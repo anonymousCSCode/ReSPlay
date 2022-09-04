@@ -82,7 +82,7 @@ The directories named with the package name contain five folders/scenarios, each
 
 ## Replay (SDP-Net)
 ---
-#### Step One: Move recorded `traces` of UIRecorder to `imageFile` directory of SDP-Net.
+#### Step One: Run monkeyrunner to simulate random clicks by developers and produce contents in the same format as the recording phase.
 
 #### Step Two: Start training.
 
@@ -119,6 +119,9 @@ python train.py
 </div>
 
 #### Step Three: Start the replaying phase.
+
+The first step is to move recorded `traces` in the recording phase to `imageFile` directory of SDP-Net.
+
 ```
 python inference.py
 ```
