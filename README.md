@@ -87,9 +87,20 @@ The directories named with the package name contain five folders/scenarios, each
 #### Step Two: Start training.
 1. Start an Appium server.
 
+The process is described in the following.
+
+<div align="center">
+	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start1.png" width="300">
+ 
+ <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start2.png" width="300">
+</div>
+
+2. Run the training script.
 ```
 python train.py
 ```
+
+
 #### Step Three:. Start the replaying phase.
 ```
 python inference.py
