@@ -83,7 +83,7 @@ The directories named with the package name contain five folders/scenarios, each
 ## Replay (SDP-Net)
 ---
 1. Move recorded `traces` of UIRecorder to `imageFile` directory of SDP-Net.
-2. Start the offline agent training process.
+2. Start the training process.
 ```
 python train.py
 ```
