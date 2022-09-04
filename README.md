@@ -85,23 +85,37 @@ The directories named with the package name contain five folders/scenarios, each
 #### Step One: Move recorded `traces` of UIRecorder to `imageFile` directory of SDP-Net.
 
 #### Step Two: Start training.
-1. Start an Appium server.
+
+1. Modify global variables in the `config` file, such as `REPLAY_RESOLUTION_X`  and `REPLAY_RESOLUTION_Y`.
+   
+   It can be obtained by the method mentioned above.
+
+2. Start an Appium server.
 
 The process is described in the following.
 
 <div align="center">
-	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start1.png" width="300">
+	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start1.png" width="250">
  
- <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start2.png" width="300">
+ <img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/appium_server_start2.png" width="250">
 </div>
 
-2. Run the training script.
+3. Run the training script.
 ```
 python train.py
 ```
 
+The output of the Appium server:
+<div align="center">
+	<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/train_appium_server.png" width="250">
+</div>
 
-#### Step Three:. Start the replaying phase.
+The console output：
+<div align="center">
+<img src="https://github.com/anonymousCSCode/ReSPlay/blob/main/Figures/ReSPlay_train.png" width="250">
+</div>
+
+#### Step Three: Start the replaying phase.
 ```
 python inference.py
 ```
