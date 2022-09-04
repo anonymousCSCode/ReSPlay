@@ -56,7 +56,7 @@ def calculate_similarity(record,replay):
         vec0 = vtr.vectorize(record)
         vec1 = vtr.vectorize(replay)
     if IMG_SIM_TYPE == 'Euclidean':
-        dist = imgsim.distance(vec0, vec1)-IMG_DIS_NRORM
+        dist = imgsim.distance(vec0, vec1)
     elif IMG_SIM_TYPE == 'Cosine':
         dist = cosine_similarity(vec0,vec1)
     return dist
