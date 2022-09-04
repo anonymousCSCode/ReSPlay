@@ -11,3 +11,4 @@ pytesseract==0.3.8
 scikit-image==0.18.2
 scikit-learn==1.1.1
 xmldiff==2.4
+imgsim==0.1.2
